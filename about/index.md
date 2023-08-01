@@ -7,15 +7,10 @@ permalink: /about/
 
 Welcome to my website! I'm **Elyanah Aco** from the Philippines.
 
-I started this website because:
-* I wanted to document my tech journey, plus
-other musings in life,
-* I dislike doing so in social media (tried Twitter
-for this, did not enjoy), and
-* having your own website sounded quite
-professional to me.
+I started this website because I wanted to document my own journey through tech 
+without the constraints of social media and still learn some frontend stuff while doing so.
 
-That being said, the code for this website is forked from LJ Miranda's own blog [here](https://ljvmiranda921.github.io/)
+Most of the code for this website is forked from LJ Miranda's own blog [here](https://ljvmiranda921.github.io/)
 with his permission. Do check him out if
 you're interested in NLP architecture and machine learning research and development.
 

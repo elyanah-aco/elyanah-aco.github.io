@@ -2,7 +2,7 @@
 layout: post
 type: post
 title: "Hello world!"
-date: 2023-07-21
+date: 2023-07-26
 category: life
 comments: true
 author: "ELYANAH ACO"
@@ -15,43 +15,29 @@ This will be my first time writing a blog or a website, and doing this with the 
 goal of getting better at coding and research is a lofty challenge. So there
 will definitely be hiccups along the way as I figure this out.
 
-Why exactly am I doing this, and why on Github pages?
+Why exactly am I doing this, and why on Github Pages?
 
-- **Public accountability with flexibility**: I tried using Twitter to document
+- **Flexibility in writing**: I tried using X (formerly Twitter) to document
     my study notes, and needing to trim your thoughts down in 280-character chunks wasn't fun.
     This setup will allow me to blabber on as much as I want to (before editing, of course).
-    While I do still use Twitter, it'll primarily just be to get news from the
+    While I do still use X, it'll primarily just be to get news from the
     select tech users I follow.
 
-- **I want to try some web development**. Web developers may scoff at what they
-    just read, but migrating to Github Pages enabled me to learn a bit of web
-    dev. Even with just a static site generator like Jekyll, I was able to dip
-    my toes on the Rails ecosystem, SCSS, and the like.
-- **Open-source experience**. I realized that if readers found any mistakes,
-    either from grammar or content, they can just go ahead and open up a Pull Request. 
-    They don't need to point them out in the comments and wait for me to
-    correct them myself. Github integration is pretty good, and I'd love to
-    leverage that[^1].
+- **Plug-and-play through open-source**: The inspiration for this blog is LJ Miranda's
+    own blog [here](https://ljvmiranda921.github.io/), which I discovered while researching
+    while NLP. It was easy to just fork from his repo and start from there. This way,
+    I could prioritize writing over the frontend stuff (which I do plan to revisit when
+    I have more time). All of this was done with LJ's permission, of course.
 
-On the other hand, there are still some things that may need some improvement:
+- **Public activity and accountability**: As of writing this entry, my Github activity
+    has been rather quiet, to say the least. Most of my dev work is on my work account on Gitlab.
+    That's not really an excuse for my shoddy activity here on my personal account - I have
+    a ton of ideas for personal project that just fail to materialize. My goal with
+    doing this to make sure some of them do see the light of day.
 
-- **Plugins require setup**. For Wordpress, I just virtually need to
-    drag and drop plugins I want to have. SEO and Analytics are automatically
-    available. With Github Pages, I need to setup Disqus for comments, Google 
-    Analytics for stats, and other things. *Github pages doesn't support
-    plugins out-of-the-box*, so if I want to do that, I need to push the
-    locally generated files instead [^2].
-- **No databases, etc.**. That's definitely expected, especially on static-site
-    generators. If you want the full blogging experience, I'd say stick to
-    other services for that. If you want a clean and lightweight experience,
-    then Github pages is a good solution for you.
+I am fairly new to Github Pages and Jekyll, so I expect to encounter some bumps in the road
+while I tinker around with this. Nevertheless, finding solutions to problems is part
+of what makes me happy as a developer. Do let me know if you find something wonky, either
+code-wise or writing-wise, by [creating a pull request](https://github.com/elyanah-aco/elyanah-aco.github.io/pulls).
 
-With that in mind, I won't suggest Jekyll + Github Pages for non-developers who
-don't want to roll-up their sleeves and tinker around their site. If you want
-an easy and no-ops way of blogging, use other providers such as Medium or
-Wordpress. But, if you find joy in building things and making things work, then
-Github pages is definitely the best solution for you!
-
-### Footnotes
-[^1]: Of course, the source code is available [on Github](https://github.com/ljvmiranda921/ljvmiranda921.github.io)
-[^2]: I solved this problem by integrating Travis-CI in my workflow. Whenever the checks on the `master` passed, it automatically deploys the **locally-generated files** to `gh-pages`, and is deployed to the website.
+That's it for this first post. Here's hoping for more in the future!
