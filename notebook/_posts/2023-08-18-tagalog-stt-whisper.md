@@ -1,11 +1,11 @@
 ---
 layout: post
-title: "Evaluating OpenAI Whisper's performance  Tagalog speech-to-text"
-date: 2023-08-15
+title: "Evaluating OpenAI Whisper's performance on Tagalog speech-to-text"
+date: 2023-08-18
 category: notebook
 comments: true
 author: "ELYANAH ACO"
-description: ""
+description: "A quick look at Whisper's Tagalog transcriptions"
 ---
 
 I've been testing out [OpenAI's Whisper](https://openai.com/research/whisper) to transcribe different English audio files for the past few days. I have to say that I'm impressed - it picks up false starts and stutters, and translates numbers and units very well. It might not always spell out names and locations correctly (which is understandable), but it does pick up when those words are named entities most of the time. It also reasonably predicts when the current statement is an exclamation or a question and uses the appropriate ending punctuations.
@@ -17,9 +17,12 @@ Whisper is an automatic speech recognition (ASR) model trained in a weakly-super
 
 Whisper itself is not finetuned to any particular dataset. As such, it does not outperform models finetuned to specific datasets, such as those trained on the LibriSpeech dataset (which is just around 960 hours of data). However, it generalizes quite well to different domains and datasets. Moreover, Whisper was trained on about 117,000 hours of non-English audio, allowing for multilingual transcription and translation.
 
-As for model architecture, Whisper is a sequence-to-sequence encoder-decoder transformer. Audio is split into 30-second chunks and converted into a log-Mel spectogram before being passed into the encoder 
+As for model architecture, Whisper is a sequence-to-sequence encoder-decoder transformer. Audio is split into 30-second chunks and converted into a log-Mel spectogram before being passed and processed in the encoder. This transformer is also trained multitude of tasks such as language identification, voice activity detection, timestamp detection, etc. which are jointly represented as a sequence of special tokens passed into and to be predicted by the decoder. The decoder also uses previous transcribed texts to help resolve ambiguous audio and to provide context in longer-range transcriptions.
 
-(CONTINUE)
+![](/assets/png/tagalog-whisper-stt/whisper_architecture.PNG){:width="700px"}
+{: style="text-align: center;"}
+*Image taken from Radford et al (2022)*
+
 
 ## Where a whisper is enough: Results and findings
 
@@ -33,7 +36,7 @@ Note that none of these were fully in Tagalog, as code-switching (CS) is commonp
 
 I ran each video through Whisper, setting the language to `tl`, and produced model transcriptions. I also manually transcribed the videos, making sure to follow Whisper's transcription format (using symbols instead of spelling out units, adding punctuation marks) and to match my work with Whisper's on the same audio portions. 
 
-To see how Whisper's transcriptions measured against my own, I computing commonly used metrics for speech recognition performance. All evaluations were made using the `jiwer` package [here](https://jitsi.github.io/jiwer/). A value closer to 0 means better accuracy in recognizing speech for all metrics aside from Word Information Preserved. The results are as follows:
+To see how Whisper's transcriptions measured against my own, I computing commonly used metrics for speech recognition performance. All evaluations were made using the `jiwer` package [here](https://jitsi.github.io/jiwer/). A value closer to 0 means better accuracy in recognizing speech for all metrics.
 
 <table>
 <thead>
@@ -78,8 +81,6 @@ To see how Whisper's transcriptions measured against my own, I computing commonl
 </tbody>
 </table>
 
-(MAYBE QUICK SUMMARY OF TABLE HERE?)
-
 Qualitatively, here's where I think Whisper works well:
 * **Transcribing English words**: I suppose this isn't a big surprise, but it's interesting to see how often it correctly transcribed English words amidst a sea of slightly wrong Tagalog ones. Take for example this snippet from the Hawaii video:
 
@@ -89,7 +90,7 @@ Qualitatively, here's where I think Whisper works well:
 
     It also does a good job of transcribing English numbers, directions and units. Segments purely in English were transcribed perfectly even up to recognizing when sentences started and ended.
 
-* **Spelling out syllables**: I suspect that Whisper failed to recognize many words from the audio, so it instead performed syllabic transcription. I honestly think it did a good job with this respect to the point that I could sometimes recognize some words from their slightly broken and misspelled transcriptions. Keep in mind that some letters are commonly interchanged, like "b" and "p", "u" and "o", "i" and "y", and "d", "k" and "t".
+* **Spelling out syllables**: I suspect that Whisper failed to recognize many words from the audio, so it instead performed syllabic transcription. Some letters are commonly interchanged, like "b" and "p", "u" and "o", "i" and "y", and "d", "k" and "t". Some words ending in vowels would also have random consonants added to the end of them. But overall, I honestly think it did a good job with this respect to the point that I could sometimes recognize some words from their slightly broken and misspelled transcriptions. The relatively low CERs also shows that this syllabic transcription works quite well.
 
 And here's where I think Whisper falls short:
 * **Combining syllables into words**: I mentioned earlier that Whisper does a good job syllabicizing the audio. It struggles a bit more in understanding which syllables to combine or not. Many of the transcriptions either split up syllables that should be in one word (like *pang hukai* for *panghukay*), or combine syllables from different words (like *parau* which should be *pa raw*). I think this point is why the CERs are relatively much lower compared to the WERs or MERs. Looking at Whisper's transcriptions, I theorize that the former happens when a word segment is itself a word. This would be a difficult hurdle to overcome given that Tagalog has many commonly used short words. 
@@ -128,9 +129,9 @@ Do I think that Whisper does a good enough job at transcribing Tagalog audio?
 
 I recommend using Whisper as a first pass and if you'll be doing a lot of manual cleaning to fix these issues. I still think that a native Tagalog speaker could figure out a few words from the syllabicized transcriptions (maybe after a lot of squinting and thinking, but still). I imagine this alone is already a huge timesaver for any transcribers looking to save some time. 
 
-It's definitely not advisable to use Whisper as-is for production though. I also doubt that someone just learning Tagalog would be able to recognize what the transcriptions are originally supposed to be. There are many errors with the transcriptions, many of which I think are too complicated to fix algorithmically. Whisper also hallucinates by repeating phrases multiple times, translating audio to English, missing entire audio segments and [even adding words not present in the original audio](https://community.openai.com/t/how-to-avoid-hallucinations-in-whisper-transcriptions/125300).
+It's definitely not advisable to use Whisper as-is for production though. I also doubt that someone just learning Tagalog would be able to recognize what the transcriptions are originally supposed to be. There are many errors with the transcriptions, many of which I think are too complicated to fix algorithmically. Whisper also hallucinates by repeating phrases multiple times, translating audio to English, missing entire audio segments and [even adding words not present in the original audio](https://community.openai.com/t/how-to-avoid-hallucinations-in-whisper-transcriptions/125300). OpenAI hypothesizes that these hallucinations occur when the model tries predicting the next word in audio and transcribing the audio itself at the same time.
 
-Of course, one can also try to finetune Whisper to work better on Tagalog data. I probably won't delve deeper into this in the future, but I recommend checking out this [HuggingFace repo](https://github.com/huggingface/community-events/tree/main/whisper-fine-tuning-event#set-up-an-environment) that contains eveything that you need to know to do this.
+Of course, one can finetune Whisper to work better on Tagalog data. I probably won't delve deeper into this in the future, but I recommend checking out this [HuggingFace repo](https://github.com/huggingface/community-events/tree/main/whisper-fine-tuning-event#set-up-an-environment) that contains eveything that you need to know to do this.
 
 ## References
 
