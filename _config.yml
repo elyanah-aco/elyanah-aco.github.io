@@ -40,7 +40,7 @@ show_workshops_section: true
 ## Disqus post comments             ##
 ## (leave blank to disable Disqus)  ##
 ######################################
-disqus_shortname: 'juniortheme-live'
+disqus_shortname: 
 
 ##########################################################################
 ## Facebook Comments plugin                                             ##
@@ -48,22 +48,22 @@ disqus_shortname: 'juniortheme-live'
 ##########################################################################
 facebook_comments:
 facebook_appid:
-facebook_comments_number: 10
+facebook_comments_number:
 
 ###################################
 ## Social icons                  ##
 ###################################
-github_username: thundergolfer
+github_username: elyanah-aco
 bitbucket_username:
 stackoverflow_id:
-twitter_username: jonobelotti_io
+twitter_username: acocodes
 skype_username:
 steam_nickname:
 google_plus_id:
-linkedin_username: jonathonbelotti
+linkedin_username: elyanahaco2000
 angellist_username:
-medium_id: thundergolfer
-youtube_channel_id: UCSP7fMKwmaXaZhViAV2Vgvg
+medium_id:
+youtube_channel_id:
 bitcoin_url:
 paypal_url:
 flattr_button:
@@ -75,8 +75,8 @@ show_sharing_icons: True
 # Change to 'true' to enable individual icons
 share_facebook: True
 share_twitter: True
-share_googleplus: True
-share_linkedin: false
+share_googleplus: false
+share_linkedin: True
 share_digg: false
 share_tumblr: false
 share_reddit: True
@@ -96,8 +96,6 @@ text:
     digg:         'Share on Digg'
     tumblr:       'Share on Tumblr'
     reddit:       'Share on Reddit'
-    stumbleupon:  'Share on StumbleUpon'
-    hackernews:   'Share on Hacker News'
   post:
     updated:        'Updated'
     minute_read:    'minute read'

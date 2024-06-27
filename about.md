@@ -4,14 +4,14 @@ title: About Me
 permalink: /about/
 tags: about
 flicker: true
-headshot: /images/headshot.jpg
+headshot: /images/profile.png
 ---
 
-I am a Software Engineering student at [RMIT University](https://www.rmit.edu.au/) in Melbourne. Starting November 2016 I will be interning with [Zendesk](https://www.zendesk.com/) in a Data Engineering role.
+Hello! 
 
-I'm currently doing a lot of work building developer communities around my University. I'll chase any opportunity to improve collaboration and outreach in the tech. industry.
+I'm Elyanah, a data professional specializing in developing data pipelines and automated solutions for financial firms. I am currently working as a consultant for [Discerene Group](https://www.discerene.com/), a value-investing hedge fund.
 
-My main areas of interest are in NLP, Agent-Oriented Programming, and Computational Dialectics.
+Outside of work, I'm involved in various natural language processing (NLP) initiatives.  
 
 {% if site.show_talks_section %}
 ## Talks
